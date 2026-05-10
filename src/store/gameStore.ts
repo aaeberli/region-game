@@ -77,7 +77,7 @@ export const useGameStore = create<GameStore>()(
       },
 
       decideTrade: (decision, tradeTo) => {
-        const { status, tradeRounds, chosenRegion } = get();
+        const { status, tradeRounds, chosenRegion, revealedRegions } = get();
         if (status !== 'phase3') return;
         const rounds = [...tradeRounds];
         const current = rounds[rounds.length - 1];
@@ -85,8 +85,14 @@ export const useGameStore = create<GameStore>()(
         current.decision = decision;
         current.tradedTo = tradeTo;
         const newChosen = decision === 'trade' && tradeTo ? tradeTo : chosenRegion;
+        // When trading away the current region, mark it as revealed so it doesn't
+        // float as an undiscovered region in Phase 4/5.
+        const newRevealed =
+          decision === 'trade' && !revealedRegions.includes(chosenRegion)
+            ? [...revealedRegions, chosenRegion]
+            : revealedRegions;
         const nextStatus = rounds.length === 4 ? 'phase4' : 'phase3';
-        set({ tradeRounds: rounds, chosenRegion: newChosen, status: nextStatus });
+        set({ tradeRounds: rounds, chosenRegion: newChosen, revealedRegions: newRevealed, status: nextStatus });
       },
 
       finalTrade: (decision, tradeTo) => {
