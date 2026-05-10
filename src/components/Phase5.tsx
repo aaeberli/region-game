@@ -7,7 +7,7 @@ import { REGION_MAP } from './ItalyMap';
 import { deobfuscatePrizeIndex } from '../crypto';
 
 const Phase5: React.FC = () => {
-  const { finalRegion, selectedRegions, revealedRegions, tradedAwayRegions, obfuscatedMap, completeGame, resetGame, status } = useGameStore();
+  const { finalRegion, selectedRegions, revealedRegions, obfuscatedMap, completeGame, resetGame, status } = useGameStore();
   const { config } = useAdminStore();
   const [otherPrize, setOtherPrize] = useState('');
   const [otherRegion, setOtherRegion] = useState('');
@@ -19,9 +19,10 @@ const Phase5: React.FC = () => {
   useEffect(() => {
     if (!finalRegion || !config) return;
 
-    // Find the one remaining undiscovered region (not finalRegion, not revealed, not traded away)
+    // Find the one remaining undiscovered region (not finalRegion, not revealed)
+    // traded-away regions are undiscovered, so they can appear here
     const remaining = selectedRegions.find(
-      (r) => r !== finalRegion && !revealedRegions.includes(r) && !tradedAwayRegions.includes(r)
+      (r) => r !== finalRegion && !revealedRegions.includes(r)
     );
     if (remaining) {
       const entry = obfuscatedMap.find((e) => e.regionId === remaining);

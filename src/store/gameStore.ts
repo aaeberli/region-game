@@ -92,7 +92,7 @@ export const useGameStore = create<GameStore>()(
           decision === 'trade' && !tradedAwayRegions.includes(chosenRegion)
             ? [...tradedAwayRegions, chosenRegion]
             : tradedAwayRegions;
-        const nextStatus = rounds.length === 4 ? 'phase4' : 'phase3';
+        const nextStatus = rounds.length === 5 ? 'phase4' : 'phase3';
         set({ tradeRounds: rounds, chosenRegion: newChosen, tradedAwayRegions: newTradedAway, status: nextStatus });
       },
 
