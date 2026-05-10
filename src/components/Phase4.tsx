@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import ItalyMap from './ItalyMap';
+import ItalyMap, { REGION_MAP } from './ItalyMap';
 import { useGameStore } from '../store/gameStore';
-import { REGION_MAP } from './ItalyMap';
 
 const Phase4: React.FC = () => {
-  const { selectedRegions, chosenRegion, revealedRegions, obfuscatedMap: _obfuscatedMap, finalTrade } = useGameStore();
+  const { selectedRegions, chosenRegion, revealedRegions, finalTrade } = useGameStore();
   const [pending, setPending] = useState('');
 
   // The two undiscovered regions (selected, not chosen, not revealed)
