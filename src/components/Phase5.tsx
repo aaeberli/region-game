@@ -142,7 +142,3 @@ const Phase5: React.FC = () => {
 };
 
 export default Phase5;
-  );
-};
-
-export default Phase5;
