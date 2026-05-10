@@ -3,12 +3,12 @@ import ItalyMap, { REGION_MAP } from './ItalyMap';
 import { useGameStore } from '../store/gameStore';
 
 const Phase4: React.FC = () => {
-  const { selectedRegions, chosenRegion, revealedRegions, finalTrade } = useGameStore();
+  const { selectedRegions, chosenRegion, revealedRegions, tradedAwayRegions, finalTrade } = useGameStore();
   const [pending, setPending] = useState('');
 
-  // The two undiscovered regions (selected, not chosen, not revealed)
+  // The two undiscovered regions (selected, not chosen, not revealed, not traded away)
   const undiscoveredRegions = selectedRegions.filter(
-    (r) => r !== chosenRegion && !revealedRegions.includes(r)
+    (r) => r !== chosenRegion && !revealedRegions.includes(r) && !tradedAwayRegions.includes(r)
   );
 
   const handleKeep = () => finalTrade('keep');

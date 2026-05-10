@@ -34,6 +34,7 @@ export interface GameState {
   chosenRegion: string;             // player's current region
   tradeRounds: TradeRound[];        // 0–4 entries (phase 3 = 4, phase 4 = optional)
   revealedRegions: string[];        // all currently revealed (non-chosen) regions
+  tradedAwayRegions: string[];      // regions the player has traded away (not revealed, not chosen)
   finalRegion: string;
   wonPrize: string;
 }
