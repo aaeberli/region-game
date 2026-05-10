@@ -41,7 +41,7 @@ const CalibratePage: React.FC = () => {
           onClick={handleClick}
         >
           {/* Current region positions (white circles) */}
-          {Object.entries(REGION_DATA).map(([id, { cx, cy, name }]) => (
+          {Object.entries(REGION_DATA).map(([id, { cx, cy }]) => (
             <g key={id}>
               <circle cx={cx} cy={cy} r={14} fill="rgba(255,255,255,0.6)" stroke="#6366f1" strokeWidth={2} />
               <text x={cx} y={cy + 4} textAnchor="middle" fontSize={12} fill="#312e81" style={{ userSelect: "none", pointerEvents: "none" }}>
