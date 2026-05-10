@@ -9,7 +9,7 @@ import { deobfuscatePrizeIndex } from '../crypto';
 type SubState = 'pick-reveal' | 'show-revealed' | 'pick-trade';
 
 const Phase3: React.FC = () => {
-  const { selectedRegions, chosenRegion, revealedRegions, tradedAwayRegions, obfuscatedMap, tradeRounds, revealRegion, decideTrade } = useGameStore();
+  const { selectedRegions, chosenRegion, revealedRegions, obfuscatedMap, tradeRounds, revealRegion, decideTrade } = useGameStore();
   const { config } = useAdminStore();
   const [subState, setSubState] = useState<SubState>('pick-reveal');
   const [pendingReveal, setPendingReveal] = useState('');
@@ -19,9 +19,9 @@ const Phase3: React.FC = () => {
   const currentRound = tradeRounds.length; // 0-based; complete rounds already in tradeRounds
   const totalRounds = 5;
 
-  // Regions available to reveal: selected, not chosen, not yet revealed, not traded away
+  // Regions available to reveal: selected, not chosen, not yet revealed
   const revealableRegions = selectedRegions.filter(
-    (r) => r !== chosenRegion && !revealedRegions.includes(r) && !tradedAwayRegions.includes(r)
+    (r) => r !== chosenRegion && !revealedRegions.includes(r)
   );
   // Regions available to trade to: selected, not chosen, not yet revealed, not the just-revealed one
   const tradableRegions = revealableRegions.filter((r) => r !== pendingReveal);
